@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- <script src="{% static 'js/ip.js' %}"></script> -->
+
+</head>
+<body>
+    <div class="container login-box">
+
+    <h2>Login</h2>
+
+   {% if messages %}
+    <ul class="global-messages">
+      {% for message in messages %}
+        <li class="{% if message.tags == 'error' %}error{% else %}success{% endif %}">
+          {{ message }}
+        </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form method="POST" id="login-form">
+        {% csrf_token %}
+        <div class="form-row">
+        <label for="username">Username:</label>
+        <input type="text" name="username" placeholder="Enter username" required>
+        </div>
+        <div class="form-row">
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="Enter password" required>
+        </div>
+        <br>
+        <button type="submit">Login</button>
+    </form>
+    </div>
+
+    <script>
+  window.onload = function() {
+    const msg = document.querySelector('.global-messages');
+    if (msg) {
+      
+      setTimeout(() => {
+        msg.remove();
+      }, 3000);
+    }
+  };
+
+</script>
+
+</body>
+</html>
